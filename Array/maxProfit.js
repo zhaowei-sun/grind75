@@ -16,6 +16,18 @@ Output: 0
 Explanation: In this case, no transactions are done and the max profit = 0.
 
 */
-
 const maxProfit = (prices) => {
+    let buy = 0, sell = 1;
+    let maximumProfit = 0;
+    while (sell < prices.length) {
+        const profit = prices[sell] - prices[buy];
+        if (profit > 0) {
+            maximumProfit = Math.max(profit, maximumProfit);
+            sell++;
+        } else {
+            buy = sell;
+            sell++;
+        }
+    }
+    return maximumProfit;
 }
