@@ -21,5 +21,11 @@ Since an empty string reads the same forward and backward, it is a palindrome.
 
 const isPalindrome = (s) => {
     const updatedS = s.toLowerCase().replace(/[^a-z0-9]/g, "");
+    for (let i = 0; i < updatedS.length; i++) {
+        if (updatedS[i] !== updatedS[updatedS.length - 1 - i]) {
+            return false;
+        }
+    }
+    return true;
 };
 
