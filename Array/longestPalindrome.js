@@ -16,7 +16,40 @@ Explanation: The longest palindrome that can be built is "a", whose length is 1.
 
 const longestPalindrome = function(s) {
     const obj = {};
+
     for (let i = 0; i < s.length; i++) {
-        
+        if (!obj[s[i]]) obj[s[i]] = 1;
+        else obj[s[i]]++;
     }
+
+    let longestLength = 0, singleExists = false;
+
+    for (const key in obj) {
+        if (obj[key] % 2 === 0) longestLength += obj[key];
+        if (obj[key] % 2 === 1) {
+            longestLength += (obj[key] - 1);
+            singleExists = true;
+        }
+    }
+
+    if (singleExists) longestLength += 1;
+
+    return longestLength;
+
+    //Approach using set
+    
+    // const set = new Set();
+    // let count = 0;
+    
+    // for (const char of s) {
+    //     if (set.has(char)) {
+	// 		count += 2;
+    //         set.delete(char);
+    //     } 
+	// 	else {
+    //         set.add(char);
+    //     }
+    // }
+
+    // return count + (set.size > 0 ? 1 : 0);
 };
