@@ -29,6 +29,8 @@ const combinationSum = (candidates, target) => {
     //it accepts the candidates, a target, and the result array
     const helper = (candidates, target, result=[]) => {
         //base case:
+        //if the array is empty, return
+        if (candidates.length === 0) return;
         //if target is negative, return
         if (target < 0) return;
         //if target is 0, push the result arr to combinations
@@ -38,11 +40,18 @@ const combinationSum = (candidates, target) => {
         }
         //recursive case:
         //for each candidate, invoke the function recursively
-        for (const c of candidates) {
+        for (let i = 0; i < candidates.length; i++) {
             //the target is target minus current candidate
             //the candidates is the same
             //the result array is the same as before with curr el added
-            helper(candidates, target - c, result.concat([c]));
+            let currEl = candidates[i];
+            if (i === 0) {
+                helper(candidates, target - currEl, result.concat([currEl]));
+            } 
+            else {
+                // console.log(currEl, candidates, target, result.concat([currEl]))
+                helper(candidates.slice(1), target - currEl, result.concat([currEl]));
+            }
         }
     }
     helper(candidates, target);
@@ -50,6 +59,6 @@ const combinationSum = (candidates, target) => {
     return combinations;
 };
 
-const nums = [2,3,6,7];
-console.log(combinationSum(nums, 7));
+const nums = [2,3,5];
+console.log(combinationSum(nums, 8));
 
