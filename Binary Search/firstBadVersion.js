@@ -18,3 +18,41 @@ Input: n = 1, bad = 1
 Output: 1
 
 */
+
+/**
+ * Definition for isBadVersion()
+ * 
+ * @param {integer} version number
+ * @return {boolean} whether the version is bad
+ * isBadVersion = function(version) {
+ *     ...
+ * };
+ */
+
+/**
+ * @param {function} isBadVersion()
+ * @return {function}
+ */
+ var solution = (isBadVersion) => {
+    /**
+     * @param {integer} n Total versions
+     * @return {integer} The first bad version
+     */
+    return function(n) {
+        //set the initial search range
+        let start = 0, end = n, mid;
+        //edge case: all is bad
+        if (isBadVersion(start)) return start;
+        //while loop for binary search
+        while (start < end - 1) {
+            //define mid point
+            mid = Math.floor((start + end) / 2);
+            //check if mid point is bad
+            //if true, set search range to start-mid
+            if (isBadVersion(mid)) end = mid;
+            //if false, set search range to mid-end
+            else start = mid;
+        }
+        return end;
+    };
+};
