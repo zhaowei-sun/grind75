@@ -22,5 +22,17 @@ Output: true
  */
 
 const canConstruct = (ransomNote, magazine) => {
-    
+    const cache = {};
+    //iterate through magazine and save all letters and freqs
+    for (let i = 0; i < magazine.length; i++) {
+        cache[magazine[i]] ? cache[magazine[i]]++ : cache[magazine[i]] = 1;
+    }
+    //iterate through ransomNode and deduct everytime a letter is used
+    for (let j = 0; j < ransomNote.length; j++) {
+    //when we reach 0 or undefined, return false
+       if (cache[ransomNote[j]]) cache[ransomNote[j]]--;
+       else return false;
+    }
+    //otherwise return true
+    return true;
 };
