@@ -29,7 +29,7 @@ Output: [0]
  * @param {ListNode} list2
  * @return {ListNode}
  */
- var mergeTwoLists = function(list1, list2) {
+const mergeTwoLists = (list1, list2) => {
     if (list1 === null && list2 === null) return null;
     const arr = [];
     let curr1 = list1, curr2 = list2;
