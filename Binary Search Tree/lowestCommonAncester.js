@@ -32,5 +32,21 @@ Output: 2
  * @return {TreeNode}
  */
 const lowestCommonAncestor = (root, p, q) => {
-    
+    //set ancester to be root
+    let ancestor = root;
+    //if ancester val is larger than p and q value
+    //update ancester to be ancester's left
+    if (ancestor.val > p.val && ancestor.val > q.val) {
+        ancestor = ancestor.left;
+        return lowestCommonAncestor(ancestor, p, q);
+    }
+    //if ancester val is smaller than p and q value
+    //update ancester to be ancester's right
+    else if (ancestor.val < p.val && ancestor.val < q.val) {
+        ancestor = ancestor.right;
+        return lowestCommonAncestor(ancestor, p, q);
+    }
+    //if between
+    //return ancester
+    else return ancestor;
 };
