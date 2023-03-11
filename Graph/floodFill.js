@@ -27,5 +27,12 @@ Explanation: The starting pixel is already colored 0, so no changes are made to 
  * @return {number[][]}
  */
 const floodFill = (image, sr, sc, color) => {
-    
+    if (image[sr][sc] === color || sr < 0 || sc < 0 || sr >= image.length || sc >= image[0].length) return image;
+    const currColor = image[sr][sc];
+    image[sr][sc] = color;
+    if (image[sr-1] && image[sr-1][sc] === currColor) floodFill(image, sr-1, sc, color);
+    if (image[sr] && image[sr][sc-1] === currColor) floodFill(image, sr, sc-1, color);
+    if (image[sr+1] && image[sr+1][sc] === currColor) floodFill(image, sr+1, sc, color);
+    if (image[sr] && image[sr][sc+1] === currColor) floodFill(image, sr, sc+1, color);
+    return image;
 };
