@@ -29,8 +29,9 @@ myQueue.empty(); // return false
 
 */
 
-const MyQueue = function() {
-    
+var MyQueue = function() {
+    this.stackPush = [];
+    this.stackPop = [];
 };
 
 /** 
@@ -38,29 +39,40 @@ const MyQueue = function() {
  * @return {void}
  */
 MyQueue.prototype.push = function(x) {
-    
+    this.stackPush.push(x);
 };
 
 /**
  * @return {number}
  */
 MyQueue.prototype.pop = function() {
-    
+    if (this.stackPop.length === 0) {
+        while (this.stackPush.length > 0) {
+            this.stackPop.push(this.stackPush.pop())
+        }
+    }
+    return this.stackPop.pop();
 };
 
 /**
  * @return {number}
  */
 MyQueue.prototype.peek = function() {
-    
+    if (this.stackPop.length === 0) {
+        while (this.stackPush.length > 0) {
+            this.stackPop.push(this.stackPush.pop())
+        }
+    }
+    return this.stackPop[this.stackPop.length - 1];
 };
 
 /**
  * @return {boolean}
  */
 MyQueue.prototype.empty = function() {
-    
+    return this.stackPush.length === 0 && this.stackPop.length === 0;
 };
+
 
 /** 
  * Your MyQueue object will be instantiated and called as such:
