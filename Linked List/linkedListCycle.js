@@ -34,21 +34,14 @@ Explanation: There is no cycle in the linked list.
  */
 
 const hasCycle = (head) => {
-    if(!head) {
-        return false;
+    let toitose = head, hare = head;
+
+    while (hare) {
+        if (!hare.next) return false;
+        hare = hare.next.next;
+        toitose = toitose.next;
+        if (hare == toitose) return true;
     }
-    let hare = head;
-    let tortoise = head;
-    while(hare) {
-        if(!hare.next) {
-            return false;
-        } else {
-            hare = hare.next.next;
-            tortoise = tortoise.next;
-        }
-        if(tortoise == hare) {
-            return true;
-        }
-    }
+
     return false;
 };
